@@ -27,6 +27,11 @@ Step 8: Created Lambda function
 <img width="1893" height="927" alt="image" src="https://github.com/user-attachments/assets/593c5a70-f040-4c0a-82da-035b04a10414" />
 
 
+I tested my bucket for its emptyness after 5 minutes because I have given age_minutes=5 instead of age_days=30.
+<img width="1912" height="913" alt="image" src="https://github.com/user-attachments/assets/1ebdf93e-323e-492e-a3a2-deb76ccd6c2c" />
+
+
+
 
 
 
