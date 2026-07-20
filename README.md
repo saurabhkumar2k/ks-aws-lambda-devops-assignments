@@ -48,6 +48,44 @@ The inline policy implemented as under:
 
 <img width="1882" height="912" alt="image" src="https://github.com/user-attachments/assets/212a6896-5374-428f-bac0-5feb6c5c6912" />
 
+Sharing Lambda code that is being implemented while creating function:-
+import boto3
+from datetime import datetime, timezone, timedelta
+
+s3 = boto3.client('s3')
+
+BUCKET_NAME = "devops-cleanup-bucket"
+
+def lambda_handler(event, context):
+
+    # Delete objects older than 5 minutes
+    cutoff_time = datetime.now(timezone.utc) - timedelta(minutes=5)
+
+    paginator = s3.get_paginator('list_objects_v2')
+
+    deleted = []
+
+    for page in paginator.paginate(Bucket=BUCKET_NAME):
+
+        for obj in page.get('Contents', []):
+
+            if obj['LastModified'] < cutoff_time:
+
+                s3.delete_object(
+                    Bucket=BUCKET_NAME,
+                    Key=obj['Key']
+                )
+
+                deleted.append(obj['Key'])
+
+    print("Deleted Objects:", deleted)
+
+    return {
+        "statusCode": 200,
+        "deleted_count": len(deleted),
+        "deleted": deleted
+    }
+
 <img width="1888" height="922" alt="image" src="https://github.com/user-attachments/assets/f176f2d8-4bb4-40fd-823d-355c570f9a46" />
 
 <img width="1881" height="912" alt="image" src="https://github.com/user-attachments/assets/95ad1992-e058-4657-8270-9ceef35e26e6" />
