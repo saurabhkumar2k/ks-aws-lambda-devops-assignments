@@ -1,5 +1,7 @@
 # ks-aws-lambda-devops-assignments
-AWS Cloud deployment
+**AWS Cloud deployment**
+
+**Question 1. Automated S3 Bucket Cleanup (Objects Older Than 30 Days)**
 
 Step 1: As recommended, region selected after login in AWS account is **us-east-1**
 <img width="1890" height="287" alt="image" src="https://github.com/user-attachments/assets/5572688e-1d52-4291-8ebd-b8155a88a2f7" />
@@ -15,7 +17,7 @@ Step 5: Created S3 bucket
 Step 6: Upload few text files.
 <img width="1876" height="905" alt="image" src="https://github.com/user-attachments/assets/5374d00b-3136-4441-96c8-619d719fdf70" />
 <img width="1883" height="902" alt="image" src="https://github.com/user-attachments/assets/b7899bd2-6393-464b-93f5-1a5814a78e8a" />
-Step 7: Created IAM role
+Step 7: Created IAM role having inline policy.
 <img width="1867" height="907" alt="image" src="https://github.com/user-attachments/assets/68a2b8c6-4def-4f3d-b18e-fbfb52a1d5fb" />
 <img width="1893" height="916" alt="image" src="https://github.com/user-attachments/assets/bcc6056e-564e-4eed-8f23-14d875e95d24" />
 <img width="1878" height="908" alt="image" src="https://github.com/user-attachments/assets/21b26e66-1ebf-4cc2-9b49-c094637c3559" />
