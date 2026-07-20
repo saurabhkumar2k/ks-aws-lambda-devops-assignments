@@ -19,6 +19,27 @@ Step 6: Upload few text files.
 <img width="1883" height="902" alt="image" src="https://github.com/user-attachments/assets/b7899bd2-6393-464b-93f5-1a5814a78e8a" />
 Step 7: Created IAM role having inline policy.
 <img width="1867" height="907" alt="image" src="https://github.com/user-attachments/assets/68a2b8c6-4def-4f3d-b18e-fbfb52a1d5fb" />
+
+The inline policy implemented as under:
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "s3:ListBucket"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:s3:::devops-cleanup-bucket"
+    },
+    {
+      "Action": [
+        "s3:DeleteObject"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:s3:::devops-cleanup-bucket/*"
+    }
+  ]
+}
 <img width="1893" height="916" alt="image" src="https://github.com/user-attachments/assets/bcc6056e-564e-4eed-8f23-14d875e95d24" />
 <img width="1878" height="908" alt="image" src="https://github.com/user-attachments/assets/21b26e66-1ebf-4cc2-9b49-c094637c3559" />
 Step 8: Created Lambda function
