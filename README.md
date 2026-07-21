@@ -202,6 +202,24 @@ def lambda_handler(event, context):
 
 <img width="1896" height="875" alt="image" src="https://github.com/user-attachments/assets/06ea5d9c-e3d4-4364-b002-0a2801aa6558" />
 
+**Step 7** : Now open IAM role and created inline policy with JSON
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "SnapshotManagement",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:CreateSnapshot",
+        "ec2:DescribeSnapshots",
+        "ec2:DeleteSnapshot",
+        "ec2:CreateTags"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+
 <img width="1885" height="923" alt="image" src="https://github.com/user-attachments/assets/2d2d5d58-fde1-4e8d-9e23-ce557691c9a4" />
 
 <img width="1890" height="848" alt="image" src="https://github.com/user-attachments/assets/0eaffc29-fc6e-46a2-8f97-367abe04685f" />
