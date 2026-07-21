@@ -97,7 +97,7 @@ I tested my bucket for its emptyness after 5 minutes because I have given age_mi
 <img width="1912" height="913" alt="image" src="https://github.com/user-attachments/assets/1ebdf93e-323e-492e-a3a2-deb76ccd6c2c" />
 
 
-## **Task 1.**
+## **Task 2.**
 ## **Automated EBS Snapshot Creation and Cleanup**
 **Step 1** : Open EC2 and navigate to Volumes in Elastic Block Store
 <img width="1907" height="907" alt="image" src="https://github.com/user-attachments/assets/1b5c9bfe-bad6-4ed7-adb1-f29bd987d157" />
