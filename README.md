@@ -222,6 +222,12 @@ def lambda_handler(event, context):
 
 <img width="1885" height="923" alt="image" src="https://github.com/user-attachments/assets/2d2d5d58-fde1-4e8d-9e23-ce557691c9a4" />
 
+**Step 8**: Now back to Lamda. While deploying created a test event.
+
+Response I got is like as under:
+Response: { "errorMessage": "An error occurred (UnauthorizedOperation) when calling the CreateSnapshot operation: You are not authorized to perform this operation. User: arn:aws:sts::985818273957:assumed-role/EBSSnapshotAutomation-role-6dsldlka/EBSSnapshotAutomation is not authorized to perform: ec2:CreateSnapshot on resource: arn:aws:ec2:us-east-1::snapshot/* because no identity-based policy allows the ec2:CreateSnapshot action. Encoded authorization failure message.
+
+**Step 9** : Started role verification
 <img width="1890" height="848" alt="image" src="https://github.com/user-attachments/assets/0eaffc29-fc6e-46a2-8f97-367abe04685f" />
 
 <img width="1890" height="823" alt="image" src="https://github.com/user-attachments/assets/32b219cf-a84d-42b4-8b8e-6b20d8f92534" />
