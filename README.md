@@ -230,6 +230,23 @@ Response: { "errorMessage": "An error occurred (UnauthorizedOperation) when call
 **Step 9** : Started role verification
 <img width="1890" height="848" alt="image" src="https://github.com/user-attachments/assets/0eaffc29-fc6e-46a2-8f97-367abe04685f" />
 
+**Step 10** Checked attached policy in permission tab. And I replaced the policy with:
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "SnapshotManagement",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:CreateSnapshot",
+        "ec2:DescribeSnapshots",
+        "ec2:DeleteSnapshot",
+        "ec2:CreateTags"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
 <img width="1890" height="823" alt="image" src="https://github.com/user-attachments/assets/32b219cf-a84d-42b4-8b8e-6b20d8f92534" />
 
 <img width="1910" height="767" alt="image" src="https://github.com/user-attachments/assets/5940e2ad-be5f-4fbc-827d-4fe11f5dc42d" />
