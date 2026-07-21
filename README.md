@@ -114,6 +114,65 @@ Got the volume ID
 
 <img width="1888" height="815" alt="image" src="https://github.com/user-attachments/assets/2eab02a5-8f9f-4844-b72c-98d6986dd50d" />
 
+**Step 4** : Lambda configuration has neen initiated. Added lambda code with:
+import boto3
+from datetime import datetime, timezone, timedelta
+
+ec2 = boto3.client("ec2")
+
+VOLUME_ID = "YOUR_VOLUME_ID"
+
+def lambda_handler(event, context):
+
+    snapshot = ec2.create_snapshot(
+        VolumeId=VOLUME_ID,
+        Description="Lambda Automated Backup"
+    )
+
+    snapshot_id = snapshot["SnapshotId"]
+
+    ec2.create_tags(
+        Resources=[snapshot_id],
+        Tags=[
+            {
+                "Key": "CreatedBy",
+                "Value": "Lambda-Backup"
+            }
+        ]
+    )
+
+    print(f"Created Snapshot: {snapshot_id}")
+
+    cutoff_date = datetime.now(timezone.utc) - timedelta(days=30)
+
+    snapshots = ec2.describe_snapshots(
+        OwnerIds=["self"]
+    )["Snapshots"]
+
+    for snap in snapshots:
+
+        tags = {
+            tag["Key"]: tag["Value"]
+            for tag in snap.get("Tags", [])
+        }
+
+        if tags.get("CreatedBy") == "Lambda-Backup":
+
+            if snap["StartTime"] < cutoff_date:
+
+                ec2.delete_snapshot(
+                    SnapshotId=snap["SnapshotId"]
+                )
+
+                print(
+                    f"Deleted Snapshot: {snap['SnapshotId']}"
+                )
+
+    return {
+        "status": "success",
+        "snapshot": snapshot_id
+    }
+
 <img width="1543" height="757" alt="image" src="https://github.com/user-attachments/assets/e4d23343-e822-4031-95fd-2fdfdec0be44" />
 
 <img width="1896" height="875" alt="image" src="https://github.com/user-attachments/assets/06ea5d9c-e3d4-4364-b002-0a2801aa6558" />
