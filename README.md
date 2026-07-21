@@ -112,8 +112,6 @@ Got the volume ID
 
 <img width="1892" height="916" alt="image" src="https://github.com/user-attachments/assets/5e3a534b-1267-40c1-9fed-64bc7d4f61f7" />
 
-<img width="1888" height="815" alt="image" src="https://github.com/user-attachments/assets/2eab02a5-8f9f-4844-b72c-98d6986dd50d" />
-
 **Step 4** : Lambda configuration has neen initiated. Added lambda code with:
 import boto3
 from datetime import datetime, timezone, timedelta
@@ -172,6 +170,15 @@ def lambda_handler(event, context):
         "status": "success",
         "snapshot": snapshot_id
     }
+
+    **Step 5** : Deploy and tested Lambda configuration.
+    Got errors like 
+    <img width="1492" height="778" alt="image" src="https://github.com/user-attachments/assets/125b7c3b-1b5e-481c-91f9-433221bc7e79" />
+
+    
+<img width="1888" height="815" alt="image" src="https://github.com/user-attachments/assets/2eab02a5-8f9f-4844-b72c-98d6986dd50d" />
+
+
 
 <img width="1543" height="757" alt="image" src="https://github.com/user-attachments/assets/e4d23343-e822-4031-95fd-2fdfdec0be44" />
 
