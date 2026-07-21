@@ -249,8 +249,16 @@ Response: { "errorMessage": "An error occurred (UnauthorizedOperation) when call
 }
 <img width="1890" height="823" alt="image" src="https://github.com/user-attachments/assets/32b219cf-a84d-42b4-8b8e-6b20d8f92534" />
 
-<img width="1910" height="767" alt="image" src="https://github.com/user-attachments/assets/5940e2ad-be5f-4fbc-827d-4fe11f5dc42d" />
+**Step 11** Try creating a snapshot manually:
+EC2 Console
+Volumes
+Select volume:vol-066452e6332aa69bb
+Actions → Create Snapshot
 
+**Step 12** Back to Lambda test and got this
+
+<img width="1910" height="767" alt="image" src="https://github.com/user-attachments/assets/5940e2ad-be5f-4fbc-827d-4fe11f5dc42d" />
+**Next Step: Verify Snapshot in EC2 Console**
 <img width="1906" height="773" alt="image" src="https://github.com/user-attachments/assets/d75350d4-f948-458e-9301-5551b05b850a" />
 
 
