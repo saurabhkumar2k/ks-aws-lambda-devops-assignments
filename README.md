@@ -257,10 +257,13 @@ Volumes
 Select volume:vol-066452e6332aa69bb
 Actions → Create Snapshot
 
-**Step 12** Back to Lambda test and got this
+**Step 12** Back to Lambda test run and found
+<img width="1718" height="717" alt="image" src="https://github.com/user-attachments/assets/b9b6159c-1611-4950-a3ea-e8557eb9b071" />
 
-<img width="1910" height="767" alt="image" src="https://github.com/user-attachments/assets/5940e2ad-be5f-4fbc-827d-4fe11f5dc42d" />
+
 **Next Step: Verify Snapshot in EC2 Console**
+<img width="1910" height="767" alt="image" src="https://github.com/user-attachments/assets/5940e2ad-be5f-4fbc-827d-4fe11f5dc42d" />
+
 <img width="1906" height="773" alt="image" src="https://github.com/user-attachments/assets/d75350d4-f948-458e-9301-5551b05b850a" />
 
 
