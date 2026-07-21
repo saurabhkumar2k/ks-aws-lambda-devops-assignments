@@ -171,9 +171,28 @@ def lambda_handler(event, context):
         "snapshot": snapshot_id
     }
 
-    **Step 5** : Deploy and tested Lambda configuration.
+  **Step 5** : Deploy and tested Lambda configuration.
     Got errors like 
    <img width="1412" height="722" alt="image" src="https://github.com/user-attachments/assets/ec4d25ce-f5ec-4f16-862f-a44d8479a4f1" />
+   
+**Step 6** : Troubleshooting has started with JSON Policy. Updated JSON like below as in screenshot
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "SnapshotManagement",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:CreateSnapshot",
+        "ec2:DescribeSnapshots",
+        "ec2:DeleteSnapshot",
+        "ec2:CreateTags"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+   
 
 <img width="1888" height="815" alt="image" src="https://github.com/user-attachments/assets/2eab02a5-8f9f-4844-b72c-98d6986dd50d" />
 
