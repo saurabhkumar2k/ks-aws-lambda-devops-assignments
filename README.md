@@ -1,7 +1,7 @@
 # ks-aws-lambda-devops-assignments
 **AWS Cloud deployment**
-
-#### **Task 1. Automated S3 Bucket Cleanup (Objects Older Than 30 Days)**
+## **Task 1.**
+## ** Automated S3 Bucket Cleanup (Objects Older Than 30 Days)**
 
 **Step 1:** As recommended, region selected after login in AWS account is **us-east-1**
 <img width="1890" height="287" alt="image" src="https://github.com/user-attachments/assets/5572688e-1d52-4291-8ebd-b8155a88a2f7" />
@@ -96,7 +96,9 @@ def lambda_handler(event, context):
 I tested my bucket for its emptyness after 5 minutes because I have given age_minutes=5 instead of age_days=30.
 <img width="1912" height="913" alt="image" src="https://github.com/user-attachments/assets/1ebdf93e-323e-492e-a3a2-deb76ccd6c2c" />
 
-**Task 2:** **Automated EBS Snapshot Creation and Cleanup**
+
+## **Task 1.**
+## **Automated EBS Snapshot Creation and Cleanup**
 **Step 1** : Open EC2 and navigate to Volumes in Elastic Block Store
 <img width="1907" height="907" alt="image" src="https://github.com/user-attachments/assets/1b5c9bfe-bad6-4ed7-adb1-f29bd987d157" />
 
