@@ -1,7 +1,7 @@
 # ks-aws-lambda-devops-assignments
 **AWS Cloud deployment**
 
-**Question 1. Automated S3 Bucket Cleanup (Objects Older Than 30 Days)**
+**Task 1. Automated S3 Bucket Cleanup (Objects Older Than 30 Days)**
 
 **Step 1:** As recommended, region selected after login in AWS account is **us-east-1**
 <img width="1890" height="287" alt="image" src="https://github.com/user-attachments/assets/5572688e-1d52-4291-8ebd-b8155a88a2f7" />
@@ -95,6 +95,52 @@ def lambda_handler(event, context):
 
 I tested my bucket for its emptyness after 5 minutes because I have given age_minutes=5 instead of age_days=30.
 <img width="1912" height="913" alt="image" src="https://github.com/user-attachments/assets/1ebdf93e-323e-492e-a3a2-deb76ccd6c2c" />
+
+**Task 2:** **Automated EBS Snapshot Creation and Cleanup**
+**Step 1** : Open EC2 and navigate to Volumes in Elastic Block Store
+<img width="1907" height="907" alt="image" src="https://github.com/user-attachments/assets/1b5c9bfe-bad6-4ed7-adb1-f29bd987d157" />
+
+**Step 2** : Created volume with some details as under in scrennshot
+<img width="1812" height="821" alt="image" src="https://github.com/user-attachments/assets/a85e6f5d-2299-45ec-8a6e-32c0c93c46dd" />
+Got the volume ID
+<img width="1618" height="447" alt="image" src="https://github.com/user-attachments/assets/5d6a2a02-b865-40b5-a5f1-d960fa4bea6b" />
+
+**Step 3** : Created IAM role with inline policy
+<img width="1898" height="832" alt="image" src="https://github.com/user-attachments/assets/ac744aee-a419-44df-8535-871042611041" />
+
+<img width="1872" height="916" alt="image" src="https://github.com/user-attachments/assets/ecc71fdc-70ce-47a0-b3ef-c4ae3e55058f" />
+
+<img width="1892" height="916" alt="image" src="https://github.com/user-attachments/assets/5e3a534b-1267-40c1-9fed-64bc7d4f61f7" />
+
+<img width="1888" height="815" alt="image" src="https://github.com/user-attachments/assets/2eab02a5-8f9f-4844-b72c-98d6986dd50d" />
+
+<img width="1543" height="757" alt="image" src="https://github.com/user-attachments/assets/e4d23343-e822-4031-95fd-2fdfdec0be44" />
+
+<img width="1896" height="875" alt="image" src="https://github.com/user-attachments/assets/06ea5d9c-e3d4-4364-b002-0a2801aa6558" />
+
+<img width="1885" height="923" alt="image" src="https://github.com/user-attachments/assets/2d2d5d58-fde1-4e8d-9e23-ce557691c9a4" />
+
+<img width="1890" height="848" alt="image" src="https://github.com/user-attachments/assets/0eaffc29-fc6e-46a2-8f97-367abe04685f" />
+
+<img width="1890" height="823" alt="image" src="https://github.com/user-attachments/assets/32b219cf-a84d-42b4-8b8e-6b20d8f92534" />
+
+<img width="1910" height="767" alt="image" src="https://github.com/user-attachments/assets/5940e2ad-be5f-4fbc-827d-4fe11f5dc42d" />
+
+<img width="1906" height="773" alt="image" src="https://github.com/user-attachments/assets/d75350d4-f948-458e-9301-5551b05b850a" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
