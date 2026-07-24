@@ -801,11 +801,61 @@ def lambda_handler(event, context):
   **Step 9** : Deploy
   <img width="1896" height="920" alt="image" src="https://github.com/user-attachments/assets/38df2c4f-45bd-4ede-b7e4-28f0cc078f99" />
 
-  **Step 10** Test status got Success
+  **Step 10** : Test status got Success
   <img width="1907" height="930" alt="image" src="https://github.com/user-attachments/assets/d7307073-c292-442c-ab3a-cabec2e2fe8e" />
 
-  **Step 11** Bucket available in S3 buckets
+  **Step 11**: Bucket available in S3 buckets
   <img width="1878" height="900" alt="image" src="https://github.com/user-attachments/assets/0ffb8ed3-1d7e-4f60-9e5a-b6db1c85f19a" />
+
+  **Step 12**: 
+  Go to bucket **devops-cleanup-bucket-ks** -> Permission -> Block public access (bucket settings)
+  <img width="1898" height="918" alt="image" src="https://github.com/user-attachments/assets/f59fb6e7-6e2c-4da4-8d91-f3e8ad0d28f7" />
+  <img width="1877" height="942" alt="image" src="https://github.com/user-attachments/assets/04600711-3865-4ef8-a848-0d8b244ffc2d" />
+
+  **Step 13** Go to Edit bucket policy 
+  Edit the policy with code
+  {
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "PublicReadTest",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::devops-cleanup-bucket-ks/*"
+    }
+  ]
+}
+
+
+**Step 14** : Again run lambda function and got response as under:
+Status: Succeeded
+Test Event Name: TestPublicAccessEvent
+
+Response:
+{
+  "statusCode": 200,
+  "publicBuckets": [
+    "devops-cleanup-bucket-ks"
+  ]
+}
+
+The area below shows the last 4 KB of the execution log.
+
+Function Logs:
+START RequestId: 856b5849-0ee8-4825-8236-489521cc778e Version: $LATEST
+Public buckets: ['devops-cleanup-bucket-ks']
+END RequestId: 856b5849-0ee8-4825-8236-489521cc778e
+REPORT RequestId: 856b5849-0ee8-4825-8236-489521cc778e	Duration: 870.90 ms	Billed Duration: 1361 ms	Memory Size: 128 MB	Max Memory Used: 97 MB	Init Duration: 489.77 ms
+
+Request ID: 856b5849-0ee8-4825-8236-489521cc778e
+<img width="1877" height="931" alt="image" src="https://github.com/user-attachments/assets/619e6b0b-c26a-4ced-8dee-10e05406bbed" />
+
+
+
+  
+
+
 
 
 
