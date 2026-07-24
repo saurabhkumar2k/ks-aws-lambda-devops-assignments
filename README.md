@@ -384,6 +384,153 @@ Go to Amazon EventBridge and Create Rule
 <img width="1887" height="927" alt="image" src="https://github.com/user-attachments/assets/1ba541b9-7b1b-47c8-b2b1-6e90222ecda0" />
 
 
+## **Task 4.**
+## **Daily AWS Cost Alert Using Cost Explorer API and SNS**
+
+**Step 1** : Creating SNS topic
+Amazon Simple Notification Service - Create Topic
+<img width="1917" height="968" alt="image" src="https://github.com/user-attachments/assets/cb9632be-3222-41c9-82a7-032239e092fe" />
+
+<img width="1881" height="907" alt="image" src="https://github.com/user-attachments/assets/4e92ed33-17ce-4a2c-83a3-d2318bc463c4" />
+
+**Step 2** : Create Subscription
+<img width="1893" height="795" alt="image" src="https://github.com/user-attachments/assets/d2694afa-c391-4a63-8dba-c8cc9f8c6665" />
+<img width="1877" height="877" alt="image" src="https://github.com/user-attachments/assets/97cd1423-1691-4fe4-9c66-70db71cd1ab2" />
+
+**Step 3** : Confirm email subscription
+<img width="1835" height="787" alt="image" src="https://github.com/user-attachments/assets/bbf73976-eaa4-4909-ae3d-49b70315ec00" />
+<img width="953" height="540" alt="image" src="https://github.com/user-attachments/assets/7073ac30-d5c9-4b3a-894c-b9002d8891c2" />
+
+**Step 4** : Creating Lambda function
+<img width="1888" height="930" alt="image" src="https://github.com/user-attachments/assets/d7d1d654-793d-4392-9583-93bf15da3a7f" />
+
+**Step 6**: Create IAM Policy
+<img width="1877" height="912" alt="image" src="https://github.com/user-attachments/assets/24c72bde-f02e-4e92-8308-a2196a4b6aa9" 
+
+  Adding inline policy with JSON code in policy editor
+  {
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "CostExplorer",
+      "Effect": "Allow",
+      "Action": [
+        "ce:GetCostAndUsage"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "SNSPublish",
+      "Effect": "Allow",
+      "Action": [
+        "sns:Publish"
+      ],
+      "Resource": "arn:aws:sns:us-east-1:985818273957:CostAlertTopic:a9a14a74-27b1-4083-a409-d147e0fa31ab"
+    }
+  ]
+}
+
+
+  <img width="1888" height="901" alt="image" src="https://github.com/user-attachments/assets/2d673cab-dccc-4f70-b6e8-03c12b26382d" />
+
+<img width="1882" height="900" alt="image" src="https://github.com/user-attachments/assets/50974af4-9acd-43aa-beaa-a0d302594ab4" />
+
+**Step 7** : Navigae to Lambda function -- DailyCostAlert
+
+lambda_function.py will be updated with code:
+import boto3
+from datetime import date
+
+ce = boto3.client('ce')
+sns = boto3.client('sns')
+
+SNS_TOPIC_ARN = "arn:aws:sns:us-east-1:985818273957:CostAlertTopic:a9a14a74-27b1-4083-a49-d147e031ab"
+
+THRESHOLD = 0.01   # testing
+# THRESHOLD = 50    # production
+
+
+def lambda_handler(event, context):
+
+    today = date.today()
+
+    start_date = today.replace(day=1).strftime('%Y-%m-%d')
+    end_date = today.strftime('%Y-%m-%d')
+
+    response = ce.get_cost_and_usage(
+        TimePeriod={
+            'Start': start_date,
+            'End': end_date
+        },
+        Granularity='MONTHLY',
+        Metrics=['UnblendedCost']
+    )
+
+    amount = float(
+        response['ResultsByTime'][0]
+        ['Total']['UnblendedCost']['Amount']
+    )
+
+    print(f"Current MTD Cost: ${amount}")
+
+    if amount > THRESHOLD:
+
+        message = (
+            f"AWS Cost Alert\n\n"
+            f"Current Month-To-Date Cost: ${amount}\n"
+            f"Threshold: ${THRESHOLD}"
+        )
+
+        sns.publish(
+            TopicArn=SNS_TOPIC_ARN,
+            Subject='AWS Cost Alert',
+            Message=message
+        )
+
+        print("Alert Sent")
+
+    else:
+        print("Threshold Not Reached")
+
+    return {
+        "statusCode": 200,
+        "cost": amount
+    }
+
+    <img width="1876" height="907" alt="image" src="https://github.com/user-attachments/assets/aa4add53-b5e9-43f3-9994-b9a0007437e0" />
+
+  **Step 8** : Deploy
+  **Step 9** : Create Test Event
+  <img width="487" height="660" alt="image" src="https://github.com/user-attachments/assets/807f2013-6919-4a3f-ae5f-9e76ee01e51b" />
+
+  While Testing I got permission error.
+  <img width="857" height="525" alt="image" src="https://github.com/user-attachments/assets/35ac33f3-207e-4986-be4a-fd4200fcd05d" />
+
+  **Step 10** : Need to rectify: 
+  **Remedy: Mistakenly wrong arn has been placed in lambda_function.py**
+  **Resolved:**
+  <img width="1860" height="833" alt="image" src="https://github.com/user-attachments/assets/e5573e25-0bb0-4383-a249-3cc741d02901" />
+
+  **At last unsubscrition mail has been received**
+  <img width="1571" height="808" alt="image" src="https://github.com/user-attachments/assets/f8c8d4ae-4932-4b80-882c-56d02110aad0" />
+
+
+
+
+  
+    
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
