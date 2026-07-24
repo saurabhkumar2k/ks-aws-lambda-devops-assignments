@@ -515,6 +515,160 @@ def lambda_handler(event, context):
   <img width="1571" height="808" alt="image" src="https://github.com/user-attachments/assets/f8c8d4ae-4932-4b80-882c-56d02110aad0" />
 
 
+## **Task 5.**
+## **Restore an EC2 Instance from the Latest Snapshot**
+
+**Step 1** : Creating lambda function 
+<img width="1893" height="903" alt="image" src="https://github.com/user-attachments/assets/1f9ded14-8a33-44df-af56-421d766d6980" />
+**Step 2** Inline policy in IAM role : Lambda → Configuration → Permissions → Execution Role
+JSON Code for inline policy
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "SnapshotAccess",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:DescribeSnapshots",
+        "ec2:DescribeImages",
+        "ec2:RegisterImage",
+        "ec2:RunInstances",
+        "ec2:CreateTags"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+
+Policy has been created
+
+<img width="1897" height="920" alt="image" src="https://github.com/user-attachments/assets/ccd75344-a38a-454c-967e-d22b8a420d31" />
+
+**Step 3** : Get volume ID from EC2 instance which is required to restore.
+<img width="1902" height="913" alt="image" src="https://github.com/user-attachments/assets/649fc045-7962-437d-907c-40c973863180" />
+
+**Step 4** : Go to the lambda function -> Code
+Update code with :
+import boto3
+from datetime import datetime
+
+ec2 = boto3.client('ec2')
+
+VOLUME_ID = "vol-0b75424c3d99583"
+
+def lambda_handler(event, context):
+
+    snapshots = ec2.describe_snapshots(
+        Filters=[
+            {
+                'Name': 'volume-id',
+                'Values': [VOLUME_ID]
+            }
+        ],
+        OwnerIds=['self']
+    )['Snapshots']
+
+    if not snapshots:
+        raise Exception("No snapshots found")
+
+    latest_snapshot = sorted(
+        snapshots,
+        key=lambda x: x['StartTime'],
+        reverse=True
+    )[0]
+
+    snapshot_id = latest_snapshot['SnapshotId']
+
+    print(f"Latest Snapshot: {snapshot_id}")
+
+    ami_name = f"restored-ami-{datetime.utcnow().strftime('%Y%m%d%H%M%S')}"
+
+    response = ec2.register_image(
+        Name=ami_name,
+        RootDeviceName='/dev/xvda',
+        VirtualizationType='hvm',
+        Architecture='x86_64',
+        BlockDeviceMappings=[
+            {
+                'DeviceName': '/dev/xvda',
+                'Ebs': {
+                    'SnapshotId': snapshot_id,
+                    'DeleteOnTermination': True,
+                    'VolumeType': 'gp3'
+                }
+            }
+        ]
+    )
+
+    ami_id = response['ImageId']
+
+    print(f"AMI Created: {ami_id}")
+
+    instance = ec2.run_instances(
+        ImageId=ami_id,
+        InstanceType='t2.micro',
+        MinCount=1,
+        MaxCount=1
+    )
+
+    instance_id = instance['Instances'][0]['InstanceId']
+
+    ec2.create_tags(
+        Resources=[instance_id],
+        Tags=[
+            {
+                'Key': 'RestoredFrom',
+                'Value': snapshot_id
+            }
+        ]
+    )
+
+    print(f"Instance Created: {instance_id}")
+
+    return {
+        "statusCode": 200,
+        "snapshot": snapshot_id,
+        "ami": ami_id,
+        "instance": instance_id
+    }
+
+    <img width="1870" height="905" alt="image" src="https://github.com/user-attachments/assets/94130f64-f133-4125-90e1-991c89fda3ee" />
+
+  **Step 5** : Deploy
+  <img width="1857" height="895" alt="image" src="https://github.com/user-attachments/assets/45f249ce-e123-4b5f-b243-c53fb6548eb4" />
+
+  **Step 6** : Test
+
+  Result is as under
+  <img width="1906" height="936" alt="image" src="https://github.com/user-attachments/assets/2ff2ce3f-5085-460a-b2ff-d776e38efe5b" />
+
+  Now screenshot of 2 EC2 instances
+  i-0f1a7590ad052e22a → TestServer (your original instance)
+  i-020e0a6f9da9a2432 → likely the restored instance created by Restore an EC2 Instance from the Latest Snapshot
+  
+  <img width="1910" height="950" alt="image" src="https://github.com/user-attachments/assets/3e35e38d-0c15-406e-b5c9-fafab18b9798" />
+
+
+## **Task 6.** :Audit S3 Buckets for Public Access and Notify
+
+**Step 1**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
 
 
   
